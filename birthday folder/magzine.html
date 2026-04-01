@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Magazine 📖</title>
+    <style>
+        /* 1. Page Layout & Background */
+        body {
+            margin: 0;
+            padding: 40px 0;
+            /* Space at top and bottom */
+            background-color: #1a1a1a;
+            /* Dark theme */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-y: auto;
+            /* Allows scrolling for tall designs */
+            perspective: 2000px;
+            /* Essential for 3D flip depth */
+        }
+
+        /* 2. Instruction Text */
+        .instruction {
+            color: #ff85a1;
+            margin-bottom: 30px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            text-shadow: 0 0 10px rgba(255, 133, 161, 0.5);
+            animation: pulse 1.5s infinite;
+        }
+
+        /* 3. The Flipbook Container */
+        .book {
+            width: 90vw;
+            max-width: 450px;
+            /* Desktop limit */
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 50px;
+            transform-style: preserve-3d;
+        }
+
+        /* 4. The Flipping Mechanism */
+        .page {
+            width: 100%;
+            height: auto;
+            /* Box grows to fit your tall image */
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+            transform-origin: left;
+            /* Flips from the left "spine" */
+        }
+
+        /* 5. Front & Back Styling */
+        .side {
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            /* Hides the back when looking at front */
+            border-radius: 10px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .front {
+            position: relative;
+            z-index: 2;
+        }
+
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: rotateY(180deg);
+            /* Pre-flipped for the transition */
+            z-index: 1;
+        }
+
+        /* 6. The Images */
+        img {
+            width: 100%;
+            height: auto;
+            /* Shows the FULL design without cropping */
+            display: block;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+
+        /* 7. Action Classes (Triggered by JS) */
+        .flipped {
+            transform: rotateY(-180deg);
+        }
+
+        /* 8. The Return Button */
+        .back-home {
+            background-color: #ff85a1;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(255, 133, 161, 0.3);
+            transition: 0.3s;
+            margin-bottom: 40px;
+        }
+
+        .back-home:hover {
+            background-color: #ff5c8a;
+            transform: scale(1.1);
+        }
+
+        /* 9. Animations */
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.7;
+                transform: scale(1.05);
+            }
+        }
+
+        /* Mobile Tweak: Ensures the flip looks good on small screens */
+        @media (max-width: 480px) {
+            .book {
+                width: 85vw;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="instruction">Click the page to flip! 👆</div>
+
+    <div class="book" id="book" onclick="flipPage()">
+        <div class="page" id="magazinePage">
+            <div class="side front">
+                <img src="page 1.png" alt="Magazine Page 1">
+            </div>
+            <div class="side back">
+                <img src="page 2.png" alt="Magazine Page 2">
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" class="back-home">Return Home</a>
+
+    <script>
+        function flipPage() {
+            const page = document.getElementById('magazinePage');
+            page.classList.toggle('flipped');
+        }
+    </script>
+</body>
+
+</html>
