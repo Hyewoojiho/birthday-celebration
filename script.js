@@ -15,7 +15,7 @@ function blowCandle() {
 
 
 function createConfetti() {
-    for(let i = 0; i < 60; i++) {
+    for (let i = 0; i < 60; i++) {
         const confetti = document.createElement('div');
         confetti.innerText = '✨';
         confetti.style.position = 'fixed';
@@ -23,7 +23,7 @@ function createConfetti() {
         confetti.style.top = '-20px';
         confetti.style.fontSize = Math.random() * 20 + 15 + 'px';
         confetti.style.zIndex = '100';
-        
+
         document.body.appendChild(confetti);
 
         const duration = Math.random() * 3 + 2;
@@ -41,11 +41,18 @@ function createConfetti() {
 function blowCandle() {
     // 1. Hide the flame
     const flame = document.getElementById('flame');
-    if(flame) flame.style.display = 'none';
+    if (flame) flame.style.display = 'none';
 
     // 2. Show the wish message
     const message = document.getElementById('wish-message');
     message.style.display = 'block';
+
+    // Inside your blowCandle function
+    const lyrics = document.createElement('div');
+    lyrics.innerHTML = "<h3>🎶 Happy Birthday to YOU! 🎂</h3>";
+    lyrics.style.color = "#ff85a1";
+    lyrics.style.marginTop = "20px";
+    document.body.appendChild(lyrics);
 
     // 3. The Celebration Sequence
     createPartyPoppers(); // Exploding emojis
@@ -67,7 +74,7 @@ function createPartyPoppers() {
         p.style.fontSize = Math.random() * 20 + 20 + 'px';
         p.style.zIndex = '100';
         p.style.pointerEvents = 'none';
-        
+
         document.body.appendChild(p);
 
         // Random explosion direction
@@ -89,7 +96,7 @@ function createPartyPoppers() {
 // Function to spawn floating balloons that go UP
 function spawnBalloons() {
     const balloonEmojis = ['🎈', '🎈', '🎈', '💗', '✨'];
-    
+
     for (let i = 0; i < 20; i++) {
         const b = document.createElement('div');
         b.innerText = balloonEmojis[Math.floor(Math.random() * balloonEmojis.length)];
@@ -98,7 +105,7 @@ function spawnBalloons() {
         b.style.left = Math.random() * 100 + 'vw';
         b.style.fontSize = '3rem';
         b.style.zIndex = '90';
-        
+
         document.body.appendChild(b);
 
         const duration = Math.random() * 4000 + 3000;
